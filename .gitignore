@@ -1,0 +1,13 @@
+# Build output (binaries are published via GitHub Releases)
+build/
+release/
+*.zip
+*.sha256
+
+# Local tooling
+.claude/
+.vs/
+*.user
+*.suo
+Thumbs.db
+desktop.ini
