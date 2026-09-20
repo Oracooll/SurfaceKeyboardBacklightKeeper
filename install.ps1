@@ -20,5 +20,11 @@ $installed = Join-Path $dest $exeName
 
 # Same Run-key value name the app itself uses for its "Start with Windows" menu item.
 Set-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Run' -Name 'SurfaceBacklightKeeper' -Value ('"' + $installed + '"')
+
+# Start menu shortcut, so it can be launched by typing its name in Start.
+$lnk = Join-Path ([Environment]::GetFolderPath('Programs')) 'Surface Keyboard Backlight Keeper.lnk'
+$sc = (New-Object -ComObject WScript.Shell).CreateShortcut($lnk)
+$sc.TargetPath = $installed; $sc.WorkingDirectory = $dest; $sc.Description = 'Keeps the Surface keyboard backlight on'; $sc.Save()
+
 Start-Process -FilePath $installed
-Write-Host "Installed to $installed and set to start at sign-in. Look for the keyboard icon in the tray."
+Write-Host "Installed to $installed, set to start at sign-in, and added to the Start menu. Look for the keyboard icon in the tray."

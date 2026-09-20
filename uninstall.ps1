@@ -6,6 +6,7 @@ Get-Process SurfaceKeyboardBacklightKeeper | Stop-Process -Force
 Get-Process SurfaceBacklightKeeper | Stop-Process -Force
 Start-Sleep -Milliseconds 500
 Remove-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Run' -Name 'SurfaceBacklightKeeper'
+Remove-Item -Force (Join-Path ([Environment]::GetFolderPath('Programs')) 'Surface Keyboard Backlight Keeper.lnk')
 Remove-Item -Recurse -Force (Join-Path $env:LOCALAPPDATA 'SurfaceKeyboardBacklightKeeper')
 Remove-Item -Recurse -Force (Join-Path $env:LOCALAPPDATA 'SurfaceBacklightKeeper')   # settings/log folder
 Remove-Item -Recurse -Force 'HKCU:\Software\SurfaceBacklightKeeper'                     # settings
